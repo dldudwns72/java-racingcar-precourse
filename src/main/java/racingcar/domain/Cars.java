@@ -29,6 +29,10 @@ public class Cars {
         this.cars = cars;
     }
 
+    public Cars(List<Car> ObjectCars){
+        this.cars = ObjectCars;
+    }
+
     private void validateNumberOfCars(List<Car> cars) {
         if (cars.size() < MIN_CAR_COUNT) {
             throw new IllegalArgumentException(MIN_CAR_COUNT_ERROR_MESSAGE);
@@ -67,4 +71,7 @@ public class Cars {
         return cars.get(index);
     }
 
+    public List<Car> getCars() {
+        return cars;
+    }
 }
