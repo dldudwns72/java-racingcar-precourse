@@ -10,6 +10,7 @@ import java.util.List;
 public class Cars {
 
     private static final String CAR_NAME_DELIMITER = ",";
+    private static final String WINNER_NAME_DELIMITER = ",";
     private static final int MIN_CAR_COUNT = 2;
     private static final int MIN_RANDOM_NUMBER = 0;
     private static final int MAX_RANDOM_NUMBER = 9;
@@ -28,14 +29,14 @@ public class Cars {
     }
 
     public String printCars() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (Car car : cars) {
             int randomNumber = Randoms.pickNumberInRange(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             car.move(randomNumber);
             String result = car.print() + SPACING_WARD;
-            sb.append(result);
+            stringBuilder.append(result);
         }
-        return sb.toString();
+        return stringBuilder.toString();
     }
 
     public int getSize() {
@@ -79,5 +80,14 @@ public class Cars {
             throw new DuplicateCarsException();
         }
     }
+
+    public String getCarNames(){
+        List<String> names = new ArrayList<>();
+        for(Car car : cars){
+            names.add(car.getName());
+        }
+        return String.join(WINNER_NAME_DELIMITER,names);
+    }
+
 
 }

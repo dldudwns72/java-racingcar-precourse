@@ -1,16 +1,16 @@
 package racingcar.ui;
 
 import racingcar.domain.Cars;
-import racingcar.domain.Winners;
+import racingcar.domain.Referee;
 
 public class OutputView {
 
     private static final String PRINT_WINNERS_PREFIX = "최종 우승자: ";
 
-    public static void finishRacing(Cars cars) {
-        Winners winners = new Winners(cars);
-        String winnerToString = winners.printWinners();
-        String printWinners = PRINT_WINNERS_PREFIX + winnerToString;
+    public static void finishRacing(Cars racingFinishCars) {
+        Referee referee =  new Referee(racingFinishCars);
+        Cars winner = referee.getWinners();
+        String printWinners = PRINT_WINNERS_PREFIX + winner.getCarNames();
         System.out.print(printWinners);
     }
 

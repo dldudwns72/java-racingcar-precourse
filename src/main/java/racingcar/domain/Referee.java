@@ -3,72 +3,46 @@ package racingcar.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Winners {
+public class Referee {
 
-    private static final String DELIMITER = ",";
-//    private static final int INIT_POSITION_COUNT = 0;
-//    private static final int INIT_CARS_INDEX = 0;
+    private static final int INIT_POSITION_COUNT = 0;
+    private static final int INIT_CARS_INDEX = 0;
 
+    private List<Car> winnerCarList;
     private Cars cars;
-    private static List<Winner> winners = new ArrayList<>();
 
-//    public Winners(Cars racingFinishCars) {
-//        winners = new ArrayList<>();
-//        this.cars = racingFinishCars;
-//        determineWinner();
-//    }
-
-    public static void addWinner(Car car) {
-        Winner winner = new Winner(car.getName());
-        winners.add(winner);
+    public Referee(Cars cars) {
+        winnerCarList = new ArrayList<>();
+        this.cars = cars;
     }
 
-//    private void determineWinner() {
-//        int maxMoveCount = getMaxMoveCount();
-//
-//        for (int index = INIT_CARS_INDEX; index < cars.getSize(); index++) {
-//            Car car = cars.getCar(index);
-//            comparePosition(car, maxMoveCount);
-//        }
-//    }
-//
-//    private int getMaxMoveCount() {
-//        int winnerMoveCount = INIT_POSITION_COUNT;
-//        for (int index = INIT_CARS_INDEX; index < cars.getSize(); index++) {
-//            Car car = cars.getCar(index);
-//            winnerMoveCount = Math.max(winnerMoveCount, car.getPosition());
-//        }
-//        return winnerMoveCount;
-//    }
-//
-//    private void comparePosition(Car car, int maxMoveCount) {
-//        if (car.getPosition() == maxMoveCount) {
-//            winners.add(new Winner(car.getName()));
-//        }
-//    }
+    public Cars getWinners() {
+        int maxMoveCount = getMaxMoveCount(cars);
+        compare(cars,maxMoveCount);
 
-//    public  String printWinners(){
-//        List<String> stringWinner = new ArrayList<>();
-//
-//        for (Winner winner : winners){
-//            stringWinner.add(winner.getWinner());
-//        }
-//
-//        String printWinners = String.join(DELIMITER, stringWinner);
-//
-//        return printWinners;
-//    }
+        return new Cars(winnerCarList);
+    }
 
-    public static String printWinners(){
-        List<String> stringWinner = new ArrayList<>();
-
-        for (Winner winner : winners){
-            stringWinner.add(winner.getWinner());
+    private int getMaxMoveCount(Cars cars) {
+        int winnerMoveCount = INIT_POSITION_COUNT;
+        for (int index = INIT_CARS_INDEX; index < cars.getSize(); index++) {
+            Car car = cars.getCar(index);
+            winnerMoveCount = Math.max(winnerMoveCount, car.getPosition());
         }
+        return winnerMoveCount;
+    }
 
-        String printWinners = String.join(DELIMITER, stringWinner);
+    private void compare(Cars cars,int maxMoveCount){
+        for (int index = INIT_CARS_INDEX; index < cars.getSize(); index++) {
+            Car car = cars.getCar(index);
+            compareMaxPosition(car, maxMoveCount);
+        }
+    }
 
-        return printWinners;
+    private void compareMaxPosition(Car car, int maxMoveCount) {
+        if (car.getPosition() == maxMoveCount) {
+            winnerCarList.add(car);
+        }
     }
 
 }
