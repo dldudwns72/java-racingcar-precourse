@@ -8,6 +8,9 @@ public class InputView {
     private static final String ATTEMPT_COUNT_MESSAGE = "시도할 회수";
     private static final String ATTEMPT_COUNT_VALIDATION_EMPTY_MESSAGE = "[Error] 시도 횟수를 숫자로 입력해주세요.";
     private static final String ATTEMPT_COUNT_VALIDATION_MESSAGE = "[Error] 시도 횟수는 숫자여야합니다.";
+    private static final String EMPTY_STRING = "";
+    private static final int ASCII_CODE_NUMBER_ZERO = 48;
+    private static final int ASCII_CODE_NUMBER_NINE = 57;
 
     public static Cars racing() {
         Racing racing = new Racing(createCars(), inputAttemptCount());
@@ -40,7 +43,7 @@ public class InputView {
     }
 
     private static void validateAttemptCountType(String attemptCount) {
-        if (attemptCount.equals("")) {
+        if (attemptCount.equals(EMPTY_STRING)) {
             throw new NumberFormatException(ATTEMPT_COUNT_VALIDATION_EMPTY_MESSAGE);
         }
 
@@ -50,9 +53,7 @@ public class InputView {
     }
 
     private static void validateAttemptCountTypeOfNumber(char attemptCount){
-        char check;
-        check = attemptCount;
-        if (check < 48 || check > 58) {
+        if (attemptCount < ASCII_CODE_NUMBER_ZERO || attemptCount >= ASCII_CODE_NUMBER_NINE) {
             throw new NumberFormatException(ATTEMPT_COUNT_VALIDATION_MESSAGE);
         }
     }
