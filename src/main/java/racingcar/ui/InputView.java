@@ -4,6 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 import racingcar.domain.AttemptCount;
 import racingcar.domain.Cars;
 import racingcar.exception.domain.CarNameException;
+import racingcar.exception.domain.CarsException;
+import racingcar.exception.ui.AttemptCountEmptyException;
 import racingcar.exception.ui.AttemptCountTypeException;
 
 public class InputView {
@@ -23,6 +25,9 @@ public class InputView {
         } catch (CarNameException e) {
             System.out.println(e.getMessage());
             return createCars();
+        } catch (CarsException e) {
+            System.out.println(e.getMessage());
+            return createCars();
         }
     }
 
@@ -33,6 +38,9 @@ public class InputView {
         try {
             return new AttemptCount(attemptCountToString);
         } catch (AttemptCountTypeException e) {
+            System.out.println(e.getMessage());
+            return inputAttemptCount();
+        } catch (AttemptCountEmptyException e) {
             System.out.println(e.getMessage());
             return inputAttemptCount();
         }
