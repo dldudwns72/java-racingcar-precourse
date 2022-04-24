@@ -56,7 +56,7 @@ public class Cars {
         List<Car> cars = new ArrayList<>();
 
         for (String carName : splitCars) {
-            validateDuplicate(cars, carName);
+            validateDuplication(cars, carName);
             cars.add(new Car(new CarName(carName)));
         }
 
@@ -69,7 +69,7 @@ public class Cars {
         }
     }
 
-    private void validateDuplicate(List<Car> cars, String carName) {
+    private void validateDuplication(List<Car> cars, String carName) {
         for (Car car : cars) {
             compareCar(car, carName);
         }
@@ -81,12 +81,12 @@ public class Cars {
         }
     }
 
-    public String getCarNames(){
+    public String getCarNames() {
         List<String> names = new ArrayList<>();
-        for(Car car : cars){
+        for (Car car : cars) {
             names.add(car.getName());
         }
-        return String.join(WINNER_NAME_DELIMITER,names);
+        return String.join(WINNER_NAME_DELIMITER, names);
     }
 
 

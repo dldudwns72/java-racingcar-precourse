@@ -9,18 +9,18 @@ public class CarName {
 
     private String name;
 
-    public CarName(String name){
+    public CarName(String name) {
         validate(name);
         this.name = name;
     }
 
     private void validate(String name) {
-        if(name.length() < MIN_CAR_NAME_LENGTH || name.length() > MAX_CAR_NAME_LENGTH ) {
+        if (name.length() < MIN_CAR_NAME_LENGTH || name.length() > MAX_CAR_NAME_LENGTH) {
             throw new CarNameException();
         }
     }
 
-    public boolean equals(String name){
+    public boolean equals(String name) {
         return this.name.equals(name);
     }
 

@@ -18,7 +18,7 @@ public class Referee {
 
     public Cars getWinners() {
         int maxMoveCount = getMaxMoveCount(cars);
-        compare(cars,maxMoveCount);
+        compare(cars, maxMoveCount);
 
         return new Cars(winnerCarList);
     }
@@ -32,7 +32,7 @@ public class Referee {
         return winnerMoveCount;
     }
 
-    private void compare(Cars cars,int maxMoveCount){
+    private void compare(Cars cars, int maxMoveCount) {
         for (int index = INIT_CARS_INDEX; index < cars.getSize(); index++) {
             Car car = cars.getCar(index);
             compareMaxPosition(car, maxMoveCount);

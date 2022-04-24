@@ -9,8 +9,8 @@ public class Car {
     private CarName name;
     private CarPosition position;
 
-    public Car(CarName name){
-        this.name= name;
+    public Car(CarName name) {
+        this.name = name;
         this.position = new CarPosition(START_POSITION_COUNT);
     }
 
