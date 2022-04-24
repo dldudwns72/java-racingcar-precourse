@@ -1,5 +1,6 @@
 package racingcar.ui;
 
+import racingcar.domain.AttemptCount;
 import racingcar.domain.Cars;
 
 public class Racing {
@@ -7,20 +8,21 @@ public class Racing {
     private static final int START_COUNT = 0;
 
     private Cars cars;
-    private int attemptCount; // 원자값 포장
+    private AttemptCount attemptCount;
 
-    public Racing(Cars cars, int attemptCount) {
+    public Racing(Cars cars, AttemptCount attemptCount) {
         this.cars = cars;
         this.attemptCount = attemptCount;
     }
 
     public Cars start() {
-        for (int startCount = START_COUNT; startCount < attemptCount; startCount++) {
+        for (int startCount = START_COUNT; startCount < attemptCount.getAttemptCount(); startCount++) {
             System.out.print(cars.printCars());
             System.out.print(SPACING_WARD);
         }
 
         return cars;
     }
+
 
 }
