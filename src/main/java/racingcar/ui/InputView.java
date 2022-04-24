@@ -9,7 +9,6 @@ import racingcar.exception.ui.AttemptCountTypeException;
 public class InputView {
     private static final String INPUT_CARS_MESSAGE = "경주할자동차이름(이름은쉼표(,)기준으로구분)";
     private static final String ATTEMPT_COUNT_MESSAGE = "시도할 회수";
-    private static final String EMPTY_STRING = "";
     private static final int ATTEMPT_COUNT_INIT = 0;
     private static final int ASCII_CODE_NUMBER_ZERO = 48;
     private static final int ASCII_CODE_NUMBER_NINE = 57;
@@ -44,7 +43,7 @@ public class InputView {
     }
 
     private static void validateAttemptCountType(String attemptCount) {
-        if (attemptCount.equals(EMPTY_STRING)) {
+        if (attemptCount.isEmpty()) {
             throw new AttemptCountEmptyException();
         }
 
