@@ -3,6 +3,7 @@ package racingcar.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.exception.domain.CarPositionException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,7 +30,7 @@ class CarPositionTest {
 
     @Test
     void printCarPosition() {
-        assertThat(carPosition.printPosition()).isEqualTo("---");
+        assertThat(carPosition.print()).isEqualTo("---");
     }
 
     @Test
@@ -37,7 +38,7 @@ class CarPositionTest {
     void validatePositionUnderZero() {
         assertThatThrownBy(() -> {
             new CarPosition(-1);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(CarPositionException.class)
           .hasMessageContaining("후진");
     }
 

@@ -1,8 +1,9 @@
 package racingcar.domain;
 
+import racingcar.exception.domain.WinnerException;
+
 public class Winner {
 
-    private static final String WINNER_EMPTY_ERROR_MESSAGE = "[ERROR] 우승자는 한 명 이상 존재해야 합니다.";
     private String winner;
 
     public Winner(String winner) {
@@ -12,7 +13,7 @@ public class Winner {
 
     private void validate(String winner) {
         if(winner.isEmpty()){
-            throw new IllegalArgumentException(WINNER_EMPTY_ERROR_MESSAGE);
+            throw new WinnerException();
         }
     }
 

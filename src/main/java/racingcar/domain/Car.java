@@ -4,7 +4,7 @@ public class Car {
 
     private static int FORWARD_COUNT = 4;
     private static int START_POSITION_COUNT = 0;
-    private static String PRINT_KEYWORD = "-";
+    private static String DELIMITER = " : ";
 
     private CarName name;
     private CarPosition position;
@@ -29,18 +29,11 @@ public class Car {
     }
 
     public boolean isEqual(Car car) {
-        return getName().equals(car.getName());
+        return this.name.equals(car.getName());
     }
 
     public String print() {
-        return getName() + " : " + positionPrint();
+        return this.name.getName() + DELIMITER + position.print();
     }
 
-    private String positionPrint(){
-        StringBuilder sb = new StringBuilder();
-        for(int index = 0 ; index < getPosition(); index ++ ){
-            sb.append(PRINT_KEYWORD);
-        }
-        return sb.toString();
-    }
 }

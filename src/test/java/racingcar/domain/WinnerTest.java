@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.exception.domain.WinnerException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -20,7 +21,7 @@ public class WinnerTest {
     void emptyWinner(){
         assertThatThrownBy(() ->{
             Winner winner = new Winner("");
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(WinnerException.class)
                 .hasMessageContaining("우승자는 한 명 이상 존재");
     }
 

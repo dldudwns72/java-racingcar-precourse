@@ -1,28 +1,31 @@
 package racingcar.domain;
 
+import racingcar.exception.domain.CarPositionException;
+
 public class CarPosition {
     private static final String PRINT_POSITION_WORD = "-";
-    private static final String MIN_POSITION_ERROR_MESSAGE = "[ERROR] 자동차는 후진할 수 없습니다.";
+    private static final int MIN_POSITION = 0;
+
     private int position;
 
-    public CarPosition(Integer position){
+    public CarPosition(Integer position) {
         validate(position);
         this.position = position;
     }
 
     private void validate(Integer position) {
-        if(position < 0){
-            throw new IllegalArgumentException(MIN_POSITION_ERROR_MESSAGE);
+        if (position < MIN_POSITION) {
+            throw new CarPositionException();
         }
     }
 
-    public void addPosition(){
+    public void addPosition() {
         position++;
     }
 
-    public String printPosition(){
+    public String print() {
         StringBuilder sb = new StringBuilder();
-        for(int index=0;index < position; index++){
+        for (int index = MIN_POSITION; index < position; index++) {
             sb.append(PRINT_POSITION_WORD);
         }
 

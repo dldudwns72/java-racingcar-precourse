@@ -2,6 +2,8 @@ package racingcar.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.exception.domain.CarsException;
+import racingcar.exception.domain.DuplicateCarsException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,8 +16,8 @@ class CarsTest {
     void createOneCarsError() {
         assertThatThrownBy(() -> {
             new Cars("lee");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[Error] 자동차는 두 대 이상 존재");
+        }).isInstanceOf(CarsException.class)
+                .hasMessageContaining("[ERROR] 자동차는 두 대 이상 존재");
     }
 
     @Test
@@ -23,8 +25,8 @@ class CarsTest {
     void validateDuplicate() {
         assertThatThrownBy(() -> {
             new Cars("kim,lee,kim");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[Error] 자동차 이름은 중복될 수 없습니다.");
+        }).isInstanceOf(DuplicateCarsException.class)
+                .hasMessage("[ERROR] 자동차 이름은 중복될 수 없습니다.");
     }
 
     @Test

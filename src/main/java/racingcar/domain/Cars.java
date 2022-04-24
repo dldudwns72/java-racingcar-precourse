@@ -1,6 +1,8 @@
 package racingcar.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.exception.domain.CarsException;
+import racingcar.exception.domain.DuplicateCarsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,43 +15,16 @@ public class Cars {
     private static final int MAX_RANDOM_NUMBER = 9;
     private static final String SPACING_WARD = "\n";
 
-    private static final String MIN_CAR_COUNT_ERROR_MESSAGE = "[Error] 자동차는 두 대 이상 존재해야 합니다.";
-    private static final String DUPLICATE_ERROR_MESSAGE = "[Error] 자동차 이름은 중복될 수 없습니다.";
-
     private List<Car> cars;
 
-    public Cars(String StringCars) {
-        String[] splitCars = StringCars.split(CAR_NAME_DELIMITER);
-        List<Car> cars = new ArrayList<>();
-        for (String carName : splitCars) {
-            validateDuplicate(cars,carName);
-            cars.add(new Car(new CarName(carName)));
-        }
-        validateNumberOfCars(cars);
-        this.cars = cars;
+    public Cars(String stringCars) {
+        String[] splitCars = splitCars(stringCars);
+        validateNumberOfCars(splitCars);
+        createCars(splitCars);
     }
 
-    public Cars(List<Car> ObjectCars){
-        this.cars = ObjectCars;
-    }
-
-    private void validateNumberOfCars(List<Car> cars) {
-        if (cars.size() < MIN_CAR_COUNT) {
-            throw new IllegalArgumentException(MIN_CAR_COUNT_ERROR_MESSAGE);
-        }
-    }
-
-    private void validateDuplicate(List<Car> cars, String carName) {
-        for (Car car : cars){
-            compareCar(car,carName);
-        }
-    }
-
-    private void compareCar(Car car,String carName){
-        Car generatedCar = new Car(new CarName(carName));
-        if (car.isEqual(generatedCar)) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
-        }
+    public Cars(List<Car> objectCars) {
+        this.cars = objectCars;
     }
 
     public String printCars() {
@@ -71,7 +46,38 @@ public class Cars {
         return cars.get(index);
     }
 
-    public List<Car> getCars() {
-        return cars;
+    private String[] splitCars(String stringCars) {
+        String[] splitCars = stringCars.split(CAR_NAME_DELIMITER);
+        return splitCars;
     }
+
+    private void createCars(String[] splitCars) {
+        List<Car> cars = new ArrayList<>();
+
+        for (String carName : splitCars) {
+            validateDuplicate(cars, carName);
+            cars.add(new Car(new CarName(carName)));
+        }
+
+        this.cars = cars;
+    }
+
+    private void validateNumberOfCars(String[] splitCars) {
+        if (splitCars.length < MIN_CAR_COUNT) {
+            throw new CarsException();
+        }
+    }
+
+    private void validateDuplicate(List<Car> cars, String carName) {
+        for (Car car : cars) {
+            compareCar(car, carName);
+        }
+    }
+
+    private void compareCar(Car car, String carName) {
+        if (car.getName().equals(carName)) {
+            throw new DuplicateCarsException();
+        }
+    }
+
 }

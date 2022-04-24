@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.exception.domain.CarNameException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -21,7 +22,7 @@ class CarNameTest {
         String carName = "TeslaZZang";
         assertThatThrownBy(() ->{
          new CarName(carName);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(CarNameException.class)
                 .hasMessage("[ERROR] 이름은 1자 이상 5자 미만이여야 합니다.");
     }
 
@@ -31,7 +32,7 @@ class CarNameTest {
         String carName = "";
         assertThatThrownBy(() ->{
             new CarName(carName);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(CarNameException.class)
                 .hasMessageContaining("[ERROR] 이름은 1자 이상 5자 미만");
     }
 
